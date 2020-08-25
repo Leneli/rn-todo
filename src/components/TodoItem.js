@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { CLR_FONT, CLR_SECOND } from './constants/colors';
 
 const styles = StyleSheet.create({
@@ -22,13 +22,17 @@ const styles = StyleSheet.create({
 });
 
 const TodoItem = props => {
-  const { todo, isFirst } = props;
-  const { title } = todo;
+  const { todo, isFirst, onRemove } = props;
+  const { id, title } = todo;
 
   return (
-    <View style={[styles.wrapper, isFirst && styles.firstElem]}>
+    <TouchableOpacity
+      style={[styles.wrapper, isFirst && styles.firstElem]}
+      onPress={() => console.log('>>> Press to', id)}
+      onLongPress={onRemove.bind(null, id)}
+    >
       <Text style={styles.title}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -49,7 +49,12 @@ const AddItem = props => {
 
   return (
     <View style={styles.wrapper}>
-      <TextInput style={styles.input} placeholder="Что нужно сделать?" value={value} onChangeText={setValue} />
+      <TextInput
+        style={styles.input}
+        placeholder="Что нужно сделать?"
+        value={value}
+        onChangeText={setValue}
+      />
       <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
