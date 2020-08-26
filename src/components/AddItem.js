@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
-import { CLR_MAIN, CLR_FONT, CLR_WHITE } from './constants/colors';
+import { CLR_MAIN, CLR_FONT, CLR_WHITE } from '../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {

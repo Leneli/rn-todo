@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { CLR_MAIN, CLR_WHITE } from './constants/colors';
+import { CLR_MAIN, CLR_WHITE } from '../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {

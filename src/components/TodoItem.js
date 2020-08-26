@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { CLR_FONT, CLR_SECOND } from './constants/colors';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { CLR_FONT, CLR_SECOND } from '../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
 });
 
 const TodoItem = props => {
-  const { todo, isFirst, onRemove } = props;
+  const { todo, isFirst, onRemove, onSelect } = props;
   const { id, title } = todo;
 
   return (
     <TouchableOpacity
       style={[styles.wrapper, isFirst && styles.firstElem]}
-      onPress={() => console.log('>>> Press to', id)}
+      onPress={onSelect.bind(null, id)}
       onLongPress={onRemove.bind(null, id)}
     >
       <Text style={styles.title}>{title}</Text>
