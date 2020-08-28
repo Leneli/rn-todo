@@ -1,19 +1,23 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
+import { TodoCard } from '../components/TodoCard';
 import { CLR_FONT, CLR_CANCEL, CLR_WARNING } from '../constants/colors';
 
-export const TodoScreen = ({ todo, goBack }) => {
-  const { title } = todo;
+export const TodoScreen = ({ todo, goBack, onDelete }) => {
+  const { title, id } = todo;
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
+        <TodoCard>
+          <Text style={styles.title}>{title}</Text>
+          <Button onPress={() => {}} title={'Edit'} />
+        </TodoCard>
       </View>
 
       <View style={styles.buttons}>
         <Button onPress={goBack} title="Go Back" color={CLR_CANCEL} />
-        <Button onPress={() => {}} title="Delete" color={CLR_WARNING} />
+        <Button onPress={onDelete.bind(null, id)} title="Delete" color={CLR_WARNING} />
       </View>
     </View>
   );
@@ -29,8 +33,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    flex: 1,
     fontSize: 20,
-    fontWeight: 'bold',
     color: CLR_FONT,
   },
 

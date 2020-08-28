@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 import Head from './src/components/Head';
@@ -11,8 +11,8 @@ export default function App() {
 
   const activeTodo = todoItems.find(item => item.id === activeId);
 
-  const removeTodo = id => setTodoItems(prev => prev.filter(todo => todo.id !== id));
   const goBack = () => setActiveId(null);
+
   const addTodo = title => {
     const newItem = {
       id: Date.now().toString(),
@@ -20,6 +20,28 @@ export default function App() {
     };
 
     setTodoItems(prev => [ newItem, ...prev ]);
+  };
+
+  const removeTodo = id => {
+    Alert.alert(
+      'Удалить',
+      'Вы уверены, что хотите удалить этот элемент?',
+      [
+        {
+          text: 'Отмена',
+          style: 'cancel',
+        },
+        {
+          text: 'Удалить',
+          style: 'destructive',
+          onPress: () => {
+            goBack();
+            setTodoItems(prev => prev.filter(todo => todo.id !== id));
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
@@ -36,7 +58,7 @@ export default function App() {
             switchTodoId={setActiveId}
           />
         ) : (
-          <TodoScreen todo={activeTodo} goBack={goBack} />
+          <TodoScreen todo={activeTodo} goBack={goBack} onDelete={removeTodo} />
         )}
       </View>
     </View>
