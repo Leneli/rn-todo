@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Modal, View, Text, TextInput, Button } from 'react-native';
-import { CLR_MAIN, CLR_CANCEL, CLR_FONT, CLR_WARNING } from '../constants/colors';
+import { StyleSheet, Modal, View, TextInput, Button } from 'react-native';
+import { TextRoboto } from '../components/ui';
+import { CLR_MAIN, CLR_CANCEL, CLR_FONT, CLR_WARNING, CLR_WHITE, CLR_SHADOW } from '../constants/colors';
 
 export const EditModal = props => {
   const { visible, todo, onSave, onClose } = props;
@@ -21,15 +22,17 @@ export const EditModal = props => {
   const handleClose = () => {
     onClose();
     setTitleValue(title);
+    setTitleError('');
   };
 
   return (
     <Modal
       visible={visible}
       animationType="slide"
+      transparent={true}
     >
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Изменить TODO</Text>
+        <TextRoboto style={styles.title}>Изменить TODO</TextRoboto>
 
         <View style={styles.content}>
           <TextInput
@@ -41,7 +44,7 @@ export const EditModal = props => {
           />
           {!!titleError && (
             <View style={styles.errorWrapper}>
-              <Text style={styles.errorText}>{titleError}</Text>
+              <TextRoboto style={styles.errorText} bold>{titleError}</TextRoboto>
             </View>
           )}
         </View>
@@ -59,8 +62,16 @@ export const EditModal = props => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    marginTop: 25,
     paddingVertical: 30,
     paddingHorizontal: 25,
+    backgroundColor: CLR_WHITE,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    shadowColor: CLR_SHADOW,
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    elevation: 2,
   },
 
   title: {
@@ -96,7 +107,6 @@ const styles = StyleSheet.create({
 
   errorText: {
     fontSize: 14,
-    fontWeight: 'bold',
     color: CLR_WARNING,
   },
 });

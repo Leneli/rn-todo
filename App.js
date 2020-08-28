@@ -1,13 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { Platform, StyleSheet, View, Alert } from 'react-native';
+import { AppLoading } from 'expo';
+import { StatusBar } from 'expo-status-bar';
+import * as Font from 'expo-font';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 import Head from './src/components/Head';
 
+async function loadingApplication () {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+  });
+}
+
 export default function App() {
+  const [loaded, setLoaded] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [todoItems, setTodoItems] = useState([]);
+
+  if (!loaded) {
+    return <AppLoading
+      startAsync={loadingApplication}
+      onFinish={() => setLoaded(true)}
+      onError={err => console.log('>>> Loading Error', err)}
+    />;
+  }
 
   const activeTodo = todoItems.find(item => item.id === activeId);
 
@@ -53,7 +71,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style={Platform.select({ ios: 'dark', android: 'light' })} />
       <Head title="TODO App" />
 
       <View style={styles.content}>

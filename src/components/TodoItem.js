@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TextRoboto } from '../components/ui';
 import { CLR_FONT, CLR_SECOND } from '../constants/colors';
 
 const styles = StyleSheet.create({
@@ -17,7 +18,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: CLR_FONT,
-    fontStyle: 'italic',
   },
 });
 
@@ -31,7 +31,7 @@ const TodoItem = props => {
       onPress={onSelect.bind(null, id)}
       onLongPress={onRemove.bind(null, id)}
     >
-      <Text style={styles.title}>{title}</Text>
+      <TextRoboto style={styles.title}>{title}</TextRoboto>
     </TouchableOpacity>
   );
 };

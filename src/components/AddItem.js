@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
-import { CLR_MAIN, CLR_FONT, CLR_WHITE } from '../constants/colors';
+import { StyleSheet, View, TextInput, Alert, Keyboard } from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; 
+import { ButtonCustom } from './ui';
+import { CLR_MAIN, CLR_FONT } from '../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -17,22 +19,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderBottomColor: CLR_MAIN,
   },
-
-  button: {
-    width: 40,
-    height: 40,
-    marginLeft: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: CLR_MAIN,
-    borderRadius: 5,
-  },
-
-  buttonText: {
-    color: CLR_WHITE,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
 });
 
 const AddItem = props => {
@@ -42,6 +28,7 @@ const AddItem = props => {
     if (value.trim()) {
       onPress(value);
       setValue('');
+      Keyboard.dismiss();
     } else {
       Alert.alert('Напишите, что Вам нужно сделать');
     }
@@ -55,9 +42,9 @@ const AddItem = props => {
         value={value}
         onChangeText={setValue}
       />
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
+      <ButtonCustom onPress={handlePress}>
+        <AntDesign name="plus" size={24} color={CLR_MAIN} />
+      </ButtonCustom>
     </View>
   );
 };

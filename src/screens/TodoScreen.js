@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Dimensions, StyleSheet, View, Button } from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; 
+import { TextRoboto, ButtonCustom } from '../components/ui';
 import { TodoCard } from '../components/TodoCard';
 import { EditModal } from '../components/EditModal';
 import { CLR_FONT, CLR_CANCEL, CLR_WARNING, CLR_MAIN } from '../constants/colors';
@@ -10,12 +12,26 @@ export const TodoScreen = ({ todo, goBack, onSave, onDelete }) => {
   const onOpenModal = () => setModal(true);
   const onCloseModal = () => setModal(false);
 
+  const toChangeOrientation = () => {};
+
+  useEffect(() => {
+    // did mount
+    Dimensions.addEventListener('change', toChangeOrientation);
+
+    // did unmount
+    return () => {
+      Dimensions.removeEventListener('change', toChangeOrientation);
+    };
+  }, []);
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <TodoCard>
-          <Text style={styles.title}>{title}</Text>
-          <Button onPress={onOpenModal} title={'Edit'} color={CLR_MAIN} />
+          <TextRoboto style={styles.title}>{title}</TextRoboto>
+          <ButtonCustom onPress={onOpenModal}>
+            <AntDesign name="edit" size={20} color={CLR_MAIN} />
+          </ButtonCustom>
         </TodoCard>
       </View>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { CLR_SHADOW, CLR_WHITE } from '../constants/colors';
 
 export const TodoCard = ({ children }) => (
