@@ -44,6 +44,13 @@ export default function App() {
     );
   };
 
+  const updateTodo = (id, { title }) => {
+    setTodoItems(oldTodoItems => oldTodoItems.map(item => {
+      if (item.id === id) item.title = title;
+      return item;
+    }));
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -58,7 +65,12 @@ export default function App() {
             switchTodoId={setActiveId}
           />
         ) : (
-          <TodoScreen todo={activeTodo} goBack={goBack} onDelete={removeTodo} />
+          <TodoScreen
+            todo={activeTodo}
+            goBack={goBack}
+            onSave={updateTodo}
+            onDelete={removeTodo}
+          />
         )}
       </View>
     </View>

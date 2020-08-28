@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { TodoCard } from '../components/TodoCard';
-import { CLR_FONT, CLR_CANCEL, CLR_WARNING } from '../constants/colors';
+import { EditModal } from '../components/EditModal';
+import { CLR_FONT, CLR_CANCEL, CLR_WARNING, CLR_MAIN } from '../constants/colors';
 
-export const TodoScreen = ({ todo, goBack, onDelete }) => {
+export const TodoScreen = ({ todo, goBack, onSave, onDelete }) => {
+  const [modal, setModal] = useState(false);
   const { title, id } = todo;
+  const onOpenModal = () => setModal(true);
+  const onCloseModal = () => setModal(false);
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <TodoCard>
           <Text style={styles.title}>{title}</Text>
-          <Button onPress={() => {}} title={'Edit'} />
+          <Button onPress={onOpenModal} title={'Edit'} color={CLR_MAIN} />
         </TodoCard>
       </View>
 
@@ -19,6 +23,13 @@ export const TodoScreen = ({ todo, goBack, onDelete }) => {
         <Button onPress={goBack} title="Go Back" color={CLR_CANCEL} />
         <Button onPress={onDelete.bind(null, id)} title="Delete" color={CLR_WARNING} />
       </View>
+
+      <EditModal
+        visible={modal}
+        todo={todo}
+        onSave={onSave}
+        onClose={onCloseModal}
+      />
     </View>
   );
 };
