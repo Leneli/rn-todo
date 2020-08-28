@@ -22,7 +22,7 @@ export const MainScreen = ({ todoItems, addTodo, removeTodo, switchTodoId }) => 
         />
       ) : (
         <View style={styles.imgWrapper}>
-          <Image source={require('../assets/img/no-items.png')} style={styles.image} resizeMode="contain" />
+          <Image source={require('../../assets/img/no-items.png')} style={styles.image} resizeMode="contain" />
         </View>
       )}
     </View>
