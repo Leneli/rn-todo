@@ -4,7 +4,7 @@ import { todoReducer } from './todoReducer';
 
 const INITIAL_STATE = {
   todoItems: [
-    { id: 1, title: 'Выучить React Native!' }
+    { id: '1', title: 'Выучить React Native!' }
   ],
 };
 
