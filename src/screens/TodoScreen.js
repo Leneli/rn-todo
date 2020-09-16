@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Dimensions, StyleSheet, View, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { TextRoboto, ButtonCustom } from '../components/ui';
 import { TodoCard } from '../components/TodoCard';
 import { EditModal } from '../components/EditModal';
 import { CLR_FONT, CLR_CANCEL, CLR_WARNING, CLR_MAIN } from '../constants/colors';
+import { ScreenContext } from '../context/screen/screenContext';
+import { TodoContext } from '../context/todo/todoContext';
 
-export const TodoScreen = ({ todo, goBack, onSave, onDelete }) => {
+export const TodoScreen = () => {
   const [modal, setModal] = useState(false);
+  const { activeId, changeScreen } = useContext(ScreenContext);
+  const { todoItems, updateTodo, removeTodo } = useContext(TodoContext);
+  const todo = todoItems.find((item) => item.id === activeId);
   const { title, id } = todo;
   const onOpenModal = () => setModal(true);
   const onCloseModal = () => setModal(false);
+  const goBack = () => changeScreen(null);
 
   const toChangeOrientation = () => {};
 
@@ -37,13 +43,13 @@ export const TodoScreen = ({ todo, goBack, onSave, onDelete }) => {
 
       <View style={styles.buttons}>
         <Button onPress={goBack} title="Go Back" color={CLR_CANCEL} />
-        <Button onPress={onDelete.bind(null, id)} title="Delete" color={CLR_WARNING} />
+        <Button onPress={removeTodo.bind(null, id)} title="Delete" color={CLR_WARNING} />
       </View>
 
       <EditModal
         visible={modal}
         todo={todo}
-        onSave={onSave}
+        onSave={updateTodo}
         onClose={onCloseModal}
       />
     </View>

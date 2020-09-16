@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { ScreenState } from './src/context/screen/ScreenState';
 import { TodoState } from './src/context/todo/TodoState';
 import { Layout } from './src/Layout';
 
@@ -23,8 +24,10 @@ export default function App() {
   }
 
   return (
-    <TodoState>
-      <Layout />
-    </TodoState>
+    <ScreenState>
+      <TodoState>
+        <Layout />
+      </TodoState>
+    </ScreenState>
   )
 }

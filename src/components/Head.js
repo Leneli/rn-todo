@@ -5,7 +5,7 @@ import { CLR_MAIN, CLR_WHITE } from '../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingTop: 30,
+    paddingTop: 50,
     paddingBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
