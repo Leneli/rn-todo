@@ -6,9 +6,7 @@ import { TodoContext } from './todoContext';
 import { todoReducer } from './todoReducer';
 
 const INITIAL_STATE = {
-  todoItems: [
-    { id: '1', title: 'Выучить React Native!' }
-  ],
+  todoItems: [],
 };
 
 export const TodoState = ({ children }) => {
