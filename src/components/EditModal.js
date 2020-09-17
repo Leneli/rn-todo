@@ -9,14 +9,15 @@ export const EditModal = props => {
   const [titleValue, setTitleValue] = useState(title);
   const [titleError, setTitleError] = useState('');
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (titleValue.trim().length < 3) {
       setTitleError('Слишком короткое значение. Введите название длиной 3 или более символов!');
-    } else {
-      setTitleError('');
-      onSave(id, { title: titleValue });
-      onClose();
+      return;
     }
+
+    setTitleError('');
+    await onSave(id, { title: titleValue });
+    onClose();
   };
 
   const handleClose = () => {
